@@ -20,13 +20,16 @@ class SvgToPdfService
     pdf = Prawn::Document.new(
       margin: @options[:margin_cm] * 28.35
     )
+    max_width = pdf.bounds.width
+    max_height = pdf.bounds.height
 
     #svg
     svg_handler = Prawn::Svg::Interface.new(
       @svg_content,
       pdf,
       at: [pdf.bounds.left, pdf.bounds.top],
-      width: pdf.bounds.width
+      width: max_width,
+      height: max_height,
     )
     svg_handler.draw
 
@@ -34,7 +37,7 @@ class SvgToPdfService
     pdf.transparent(0.1) do
       pdf.draw_text(
         @options[:watermark],
-        at: [100, 100],
+        at: [pdf.bounds.width/4 , pdf.bounds.height/2],
         size: 50,
         rotate: 30
       )
