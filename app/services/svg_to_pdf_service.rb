@@ -20,6 +20,8 @@ class SvgToPdfService
     pdf = Prawn::Document.new(
       margin: @options[:margin_cm] * 28.35
     )
+
+    #bounds
     max_width = pdf.bounds.width
     max_height = pdf.bounds.height
 
