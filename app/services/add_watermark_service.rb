@@ -1,5 +1,6 @@
 require "rexml/document"
 
+###depricated
 class AddWatermarkService
   DEFAULTS = {
     text: "watermark",
