@@ -10,7 +10,7 @@ class DocumentsController < ApplicationController
 
     svg_content = svg_file.read
     filename = File.basename(svg_file.original_filename, ".*")
-    filepath = upload_dir.join(filename.to_s)
+    filepath = upload_dir.join("#{filename}.svg")
 
     File.open(filepath, "wb") { |f| f.write(svg_content) }
 

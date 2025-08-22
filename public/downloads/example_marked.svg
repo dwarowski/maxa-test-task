@@ -1,0 +1,7 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400'>
+  <rect x='0' y='0' width='600' height='400' fill='#f2f2f2'/>
+  <circle cx='300' cy='200' r='80' fill='#4a90e2'/>
+  <text x='80%' y='80%' text-anchor='middle' dominant-baseline='middle' fill='#000' fill-opacity='0.15' font-size='48' font-family='sans-serif' style='pointer-events:none; user-select:none;'>
+    amerikaya hallo!
+  </text>
+</svg>
