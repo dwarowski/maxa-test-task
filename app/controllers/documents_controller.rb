@@ -11,6 +11,9 @@ class DocumentsController < ApplicationController
 
     #file essentials
     file_content = file.read
+    if !file.original_filename.match(/\.svg/)
+      return render json: { error: "unsupported file format" }, status: :bad_request
+    end 
     filename = File.basename(file.original_filename, ".*")
     filepath = upload_dir.join("#{filename}.svg")
     
