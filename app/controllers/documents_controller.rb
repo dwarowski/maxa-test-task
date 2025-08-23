@@ -21,8 +21,13 @@ class DocumentsController < ApplicationController
     File.open(filepath, "wb") { |f| f.write(file_content) }
 
     #convert and mark
-    service = SvgToPdfService.new(file_content, watermark: "MAXA-test-task")
-    service.save(download_dir.join("#{filename}_marked.pdf"))
+    begin 
+      service = SvgToPdfService.new(file_content, watermark: "MAXA-test-task")
+      service.save(download_dir.join("#{filename}_marked.pdf"))
+    rescue StandardError => e
+      Rails.logger.error("SVG error: #{e.message}")
+      return render json: { error: "Invalid SVG file"}, status: :bad_request
+    end
 
     #return
     render json: {url: "#{request.base_url}/downloads/#{filename}_marked.pdf"}
