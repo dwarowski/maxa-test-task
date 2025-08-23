@@ -7,7 +7,7 @@ class DocumentsController < ApplicationController
 
     #get file
     file = params[:file]
-    return render json: {error: "file not upload"}, status: :bad_request unless file
+    return render json: {error: "file not upload"}, status: :bad_request unless file && file.respond_to?(:original_filename)
 
     #file essentials
     file_content = file.read
