@@ -23,7 +23,7 @@ describe "Documents API", type: :request do
         schema type: :object, 
           properties: { url: { type: :string, format: :uri } }, 
           required: ["url"], 
-          example: { url: "http://localhost:3000/documents/file.pdf" }
+          example: { error: nil, url: "http://localhost:3000/documents/file.pdf" }
 
         run_test! do |response|
           json = JSON.parse(response.body)
@@ -38,7 +38,7 @@ describe "Documents API", type: :request do
         schema type: :object, 
         properties: { error: { type: :string } }, 
         required: ["error"], 
-        example: { error: "File not uploaded" }
+        example: { error: "File not uploaded", url: nil}
 
         run_test!
       end
@@ -49,7 +49,7 @@ describe "Documents API", type: :request do
         schema type: :object, 
         properties: { error: { type: :string } }, 
         required: ["error"], 
-        example: { error: "Unsupported file format" }
+        example: { error: "Unsupported file format", url: nil  }
 
         run_test!
       end
@@ -60,7 +60,7 @@ describe "Documents API", type: :request do
         schema type: :object, 
         properties: { error: { type: :string } }, 
         required: ["error"], 
-        example: { error: "Invalid SVG file" }
+        example: { error: "Invalid SVG file", url: nil }
 
         run_test!
       end

@@ -37,6 +37,7 @@ paths:
             required:
             - url
             example:
+              error:
               url: http://localhost:3000/documents/file.pdf
         '422':
           description: File not uploaded
@@ -49,6 +50,7 @@ paths:
             - error
             example:
               error: File not uploaded
+              url:
         '415':
           description: Unsupported file format
           schema:
@@ -60,6 +62,7 @@ paths:
             - error
             example:
               error: Unsupported file format
+              url:
         '400':
           description: Invalid SVG file
           schema:
@@ -71,3 +74,4 @@ paths:
             - error
             example:
               error: Invalid SVG file
+              url:
