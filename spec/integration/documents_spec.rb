@@ -32,7 +32,7 @@ describe "Documents API", type: :request do
         end
       end
 
-      response "204", "File not uploaded" do
+      response "422", "File not uploaded" do
         let(:file) { nil }
 
         schema type: :object, 
