@@ -13,12 +13,12 @@ class DocumentsController < ApplicationController
 
     # Get file from multipart
     file = params[:file]
-    return render json: {error: "File not uploaded"}, status: :unprocessable_entity unless file && file.respond_to?(:original_filename)
+    return render json: DocumentBlueprint.render({error: "File not uploaded", url: nil}), status: :unprocessable_content unless file && file.respond_to?(:original_filename)
 
     # File essentials
     file_content = file.read
     if !file.original_filename.match(/\.svg/)
-      return render json: { error: "Unsupported file format" }, status: :unsupported_media_type
+      return render json: DocumentBlueprint.render({ error: "Unsupported file format", url: nil}), status: :unsupported_media_type
     end 
     filename = File.basename(file.original_filename, ".*")
     filepath = upload_dir.join("#{filename}.svg")
@@ -32,9 +32,9 @@ class DocumentsController < ApplicationController
       service.save(download_dir.join("#{filename}_marked.pdf"))
     rescue StandardError => e
       Rails.logger.error("SVG error: #{e.message}")
-      return render json: { error: "Invalid SVG file"}, status: :bad_request
+      return render json: DocumentBlueprint.render({ error: "Invalid SVG file", url: nil}), status: :bad_request
     end
 
-    render json: {url: "#{request.base_url}/downloads/#{filename}_marked.pdf"}
+    render json: DocumentBlueprint.render({error: nil, url: "#{request.base_url}/downloads/#{filename}_marked.pdf"}), status: :ok
   end
 end
