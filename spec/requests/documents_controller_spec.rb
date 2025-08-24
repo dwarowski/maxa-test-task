@@ -22,7 +22,7 @@ describe "Documents_API", type: :request do
     # Check if file uploaded 
     it "Return error if file not uploaded" do
       post "/documents",  params: { }
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
     end
 
     # Check if file ext correct 
