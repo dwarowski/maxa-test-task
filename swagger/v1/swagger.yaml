@@ -38,7 +38,7 @@ paths:
             - url
             example:
               url: http://localhost:3000/documents/file.pdf
-        '204':
+        '422':
           description: File not uploaded
           schema:
             type: object
