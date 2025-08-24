@@ -1,0 +1,73 @@
+---
+swagger: '2.0'
+info:
+  title: MAXA_TEST_TASK_API
+  version: v1
+consumes:
+- application/json
+- multipart/form-data
+produces:
+- application/json
+paths:
+  "/documents":
+    post:
+      summary: SVG Upload
+      description: Upload SVG file and convert it to PDF with watermark
+      tags:
+      - Convertion
+      consumes:
+      - multipart/form-data
+      produces:
+      - application/json
+      parameters:
+      - name: file
+        in: formData
+        type: file
+        description: File to convert
+        required: true
+      responses:
+        '200':
+          description: Converted file URL
+          schema:
+            type: object
+            properties:
+              url:
+                type: string
+                format: uri
+            required:
+            - url
+            example:
+              url: http://localhost:3000/documents/file.pdf
+        '204':
+          description: File not uploaded
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+            required:
+            - error
+            example:
+              error: File not uploaded
+        '415':
+          description: Unsupported file format
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+            required:
+            - error
+            example:
+              error: Unsupported file format
+        '400':
+          description: Invalid SVG file
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+            required:
+            - error
+            example:
+              error: Invalid SVG file
