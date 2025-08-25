@@ -29,6 +29,9 @@
 !/tmp/storage/.keep
 /public/downloads
 /public/uploads
+/config/nginx/ssl
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+/config/credentials/production.key
