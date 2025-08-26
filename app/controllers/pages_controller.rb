@@ -1,5 +1,5 @@
 class PagesController < ActionController::Base
-  def home 
+  def home
     render inline: <<-ERB
     <!DOCTYPE html>
     <html>
@@ -41,7 +41,7 @@ class PagesController < ActionController::Base
         }
       </style>
       </head>
-      
+    #{'  '}
       <body>
         <h1>Конвертер SVG в PDF</h1>
         <form id="uploadForm" enctype="multipart/form-data">
@@ -98,14 +98,22 @@ class PagesController < ActionController::Base
             modal.style.display = 'none';
           });
 
-          downloadBtn.addEventListener('click', () => {
+          downloadBtn.addEventListener('click', async () => {
+          try {
+            const downloadUrl = pdfUrl.replace(/^https:/, 'http:');
+            const response = await fetch(downloadUrl);
+            const blob = await response.blob();
             const link = document.createElement('a');
-            link.href = pdfUrl;
-            link.download = pdfUrl.split('/').pop();
+            link.href = URL.createObjectURL(blob);
+            link.download = pdfUrl.split('/').pop(); // имя файла из URL
             document.body.appendChild(link);
             link.click();
-            document.body.removeChild(link);
+            link.remove();
+          } catch (err) {
+            alert("Не удалось скачать файл: " + err.message);
+          } finally {
             modal.style.display = 'none';
+          }
           });
 
           continueBtn.addEventListener('click', () => {
