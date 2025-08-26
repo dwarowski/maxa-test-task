@@ -1,7 +1,5 @@
 require "swagger_helper"
 
-# frozen_string_literal: true
-
 describe "Documents API", type: :request do
   path "/documents" do
     post "SVG Upload" do
@@ -16,13 +14,13 @@ describe "Documents API", type: :request do
         description: "File to convert",
         required: true
 
-      
+
       response "200", "Converted file URL" do
         let(:file) { Rack::Test::UploadedFile.new(Rails.root.join("spec/fixture/files/test.svg"), "image/svg+xml") }
-        
-        schema type: :object, 
-          properties: { url: { type: :string, format: :uri } }, 
-          required: ["url"], 
+
+        schema type: :object,
+          properties: { url: { type: :string, format: :uri } },
+          required: [ "url" ],
           example: { error: nil, url: "http://localhost:3000/documents/file.pdf" }
 
         run_test! do |response|
@@ -35,20 +33,20 @@ describe "Documents API", type: :request do
       response "422", "File not uploaded" do
         let(:file) { nil }
 
-        schema type: :object, 
-        properties: { error: { type: :string } }, 
-        required: ["error"], 
-        example: { error: "File not uploaded", url: nil}
+        schema type: :object,
+        properties: { error: { type: :string } },
+        required: [ "error" ],
+        example: { error: "File not uploaded", url: nil }
 
         run_test!
       end
 
       response "415", "Unsupported file format" do
         let(:file) { Rack::Test::UploadedFile.new(Rails.root.join("spec/fixture/files/text.txt"), "text/plain") }
-        
-        schema type: :object, 
-        properties: { error: { type: :string } }, 
-        required: ["error"], 
+
+        schema type: :object,
+        properties: { error: { type: :string } },
+        required: [ "error" ],
         example: { error: "Unsupported file format", url: nil  }
 
         run_test!
@@ -56,10 +54,10 @@ describe "Documents API", type: :request do
 
       response "400", "Invalid SVG file" do
         let(:file) { Rack::Test::UploadedFile.new(Rails.root.join("spec/fixture/files/incorrect.svg"), "image/svg+xml") }
-        
-        schema type: :object, 
-        properties: { error: { type: :string } }, 
-        required: ["error"], 
+
+        schema type: :object,
+        properties: { error: { type: :string } },
+        required: [ "error" ],
         example: { error: "Invalid SVG file", url: nil }
 
         run_test!

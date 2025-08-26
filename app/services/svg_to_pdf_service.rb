@@ -23,7 +23,7 @@ class SvgToPdfService
     @options = DEFAULTS.merge(options)
   end
 
-  # Creates new pdf add watermark, borders and svg 
+  # Creates new pdf add watermark, borders and svg
   def call
     # Borders
     pdf = Prawn::Document.new(
@@ -38,7 +38,7 @@ class SvgToPdfService
     svg_handler = Prawn::Svg::Interface.new(
       @svg_content,
       pdf,
-      at: [pdf.bounds.left, pdf.bounds.top],
+      at: [ pdf.bounds.left, pdf.bounds.top ],
       width: max_width,
       height: max_height,
     )
@@ -48,7 +48,7 @@ class SvgToPdfService
     pdf.transparent(0.1) do
       pdf.draw_text(
         @options[:watermark],
-        at: [pdf.bounds.width/4 , pdf.bounds.height/2],
+        at: [ pdf.bounds.width/4, pdf.bounds.height/2 ],
         size: 50,
         rotate: 30
       )
@@ -59,7 +59,7 @@ class SvgToPdfService
   # Saves changed file to path
   #
   # @param [String] path Full path and filename to save pdf
-  # @return [String] file content string  
+  # @return [String] file content string
   def save(path)
     # save pdf to determined path
     call.render_file(path)

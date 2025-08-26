@@ -41,7 +41,7 @@ class PagesController < ActionController::Base
         }
       </style>
       </head>
-    #{'  '}
+
       <body>
         <h1>Конвертер SVG в PDF</h1>
         <form id="uploadForm" enctype="multipart/form-data">

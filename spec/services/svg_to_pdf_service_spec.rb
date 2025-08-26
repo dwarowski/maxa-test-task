@@ -1,11 +1,9 @@
 require "rails_helper"
 
-# frozen_string_literal: true
-
 describe SvgToPdfService do
   # File
-  let(:svg) {"<svg xmlns='http://www.w3.org/2000/svg'><rect width='100' height='100'/></svg>"}
-  
+  let(:svg) { "<svg xmlns='http://www.w3.org/2000/svg'><rect width='100' height='100'/></svg>" }
+
   # Check if file creates
   it "Convert to pdf and add watermark" do
     service = described_class.new(svg, watermark: "test")
