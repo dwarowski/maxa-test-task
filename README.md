@@ -31,7 +31,7 @@ Usually you keep credentials key and yaml in your team but in this case we going
 rm -rf credentials
 EDITOR="nano" rails credentials:edit -e production
 ```
-This command is going to open nano where you can edit the credentials if you need to. Also this command creates production.key change ``your_master_key`` to key inside file
+This command is going to open nano where you can edit the credentials if you need to. Also this command creates production.key. Change ``your_master_key`` to key inside this file
 
 ### Third step: Nginx
 Create ssl certifates or use yours
@@ -49,4 +49,5 @@ docker-compose up -d --build
 #### Endpoints
 * /documents - multipart-form/image for convertion SVG to PDF returns error or url to converted file 
 * /api-docs - swagger
-* /* - view (simple frontend) 
+* /documents/example.pdf - converted files where example.pdf is a filename for file on server 
+* /* - view (simple frontend)
