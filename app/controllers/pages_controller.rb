@@ -105,7 +105,7 @@ class PagesController < ActionController::Base
             const blob = await response.blob();
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = pdfUrl.split('/').pop(); // имя файла из URL
+            link.download = downloadUrl.split('/').pop(); // имя файла из URL
             document.body.appendChild(link);
             link.click();
             link.remove();
